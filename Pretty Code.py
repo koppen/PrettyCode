@@ -9,13 +9,13 @@ class PrettifyCodeCommand(sublime_plugin.TextCommand):
     for region in self.source_regions():
       self.prettify_region(region)
 
-  # Replaces region with the prettified version
   def prettify_region(self, region):
+    """Replaces region with the prettified version."""
     result = self.prettified_region(region)
     self.view.replace(self.edit, region, result)
 
-  # Returns the prettified version of region
   def prettified_region(self, region):
+    """Returns the prettified version of region."""
     pwd = os.path.join(sublime.packages_path(), 'PrettyCode')
     ruby_interpreter = '/usr/bin/env ruby'
 
@@ -43,16 +43,16 @@ class PrettifyCodeCommand(sublime_plugin.TextCommand):
   def view(self):
     return self.edit.active_view()
 
-  # Returns a region covering all text in the currently active view
   def region_with_all_text(self):
+    """Returns a region covering all text in the currently active view."""
     return sublime.Region(0, self.view.size())
 
-  # Returns the currently selected text
   def selected_regions(self):
+    """Returns the currently selected text."""
     return self.view.sel()
 
-  # Returns the source texts to prettify as regions
   def source_regions(self):
+    """Returns the source texts to prettify as regions."""
     def non_empty(region):
       return not region.empty()
 
