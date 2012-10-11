@@ -39,7 +39,7 @@ class PrettifyCodeCommand(sublime_plugin.TextCommand):
 
   def run(self, edit):
     if not self.supported_syntax(self.syntax()):
-      sublime.error_message("No prettifier is defined for %s" % [self.syntax()])
+      sublime.error_message("No prettifier is defined for " + self.syntax())
       return None
 
     self.edit = edit
@@ -48,14 +48,14 @@ class PrettifyCodeCommand(sublime_plugin.TextCommand):
       self.prettify_region(region)
 
   def syntax(self):
-    """Returns the lowercased syntax name used in the active view."""
+    """Returns the syntax name used in the active view."""
     syntax = self.view.settings().get('syntax')
     language = syntax.split('/')
-    return language[1].lower()
+    return language[1]
 
   def supported_syntax(self, syntax):
     """Returns True if syntax has an associated prettifier."""
-    return PrettifyCodeCommand.PRETTIFIERS.has_key(syntax)
+    return PrettifyCodeCommand.PRETTIFIERS.has_key(syntax.lower())
 
   def prettify_region(self, region):
     """Replaces region with the prettified version."""
@@ -64,7 +64,7 @@ class PrettifyCodeCommand(sublime_plugin.TextCommand):
 
   def prettified_region(self, region):
     """Returns the prettified version of region."""
-    prettifier = PrettifyCodeCommand.PRETTIFIERS[self.syntax()]
+    prettifier = PrettifyCodeCommand.PRETTIFIERS[self.syntax().lower()]
     return prettifier().run(self.view.substr(region))
 
   def region_with_all_text(self):
