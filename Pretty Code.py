@@ -37,6 +37,7 @@ class PrettifyCodeCommand(sublime_plugin.TextCommand):
 
   def run(self, edit):
     if not self.supported_syntax(self.syntax()):
+      sublime.error_message("No prettifier is defined for %s" % [self.syntax()])
       return None
 
     self.edit = edit
