@@ -29,6 +29,12 @@ class RubyPrettifier:
     return output
 
 class PrettifyCodeCommand(sublime_plugin.TextCommand):
+
+  # Sets up supported prettifiers, mapped by their syntax names in lowercase
+  PRETTIFIERS = {
+    'ruby': RubyPrettifier
+  }
+
   def run(self, edit):
     if not self.supported_syntax(self.syntax()):
       return None
@@ -39,14 +45,14 @@ class PrettifyCodeCommand(sublime_plugin.TextCommand):
       self.prettify_region(region)
 
   def syntax(self):
-    """Returns the syntax used in the active view."""
+    """Returns the lowercased syntax name used in the active view."""
     syntax = self.view.settings().get('syntax')
     language = syntax.split('/')
-    return language[1]
+    return language[1].lower()
 
   def supported_syntax(self, syntax):
     """Returns True if syntax has an associated prettifier."""
-    return "Ruby" == syntax
+    return PrettifyCodeCommand.PRETTIFIERS.has_key(syntax)
 
   def prettify_region(self, region):
     """Replaces region with the prettified version."""
@@ -55,8 +61,8 @@ class PrettifyCodeCommand(sublime_plugin.TextCommand):
 
   def prettified_region(self, region):
     """Returns the prettified version of region."""
-
-    return RubyPrettifier().run(self.view.substr(region))
+    prettifier = PrettifyCodeCommand.PRETTIFIERS[self.syntax()]
+    return prettifier().run(self.view.substr(region))
 
   def region_with_all_text(self):
     """Returns a region covering all text in the currently active view."""
