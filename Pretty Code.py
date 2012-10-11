@@ -4,10 +4,23 @@ import subprocess
 
 class PrettifyCodeCommand(sublime_plugin.TextCommand):
   def run(self, edit):
+    if not self.supported_syntax(self.syntax()):
+      return None
+
     self.edit = edit
 
     for region in self.source_regions():
       self.prettify_region(region)
+
+  def syntax(self):
+    """Returns the syntax used in the active view."""
+    syntax = self.view.settings().get('syntax')
+    language = syntax.split('/')
+    return language[1]
+
+  def supported_syntax(self, syntax):
+    """Returns True if syntax has an associated prettifier."""
+    return "Ruby" == syntax
 
   def prettify_region(self, region):
     """Replaces region with the prettified version."""
@@ -40,9 +53,6 @@ class PrettifyCodeCommand(sublime_plugin.TextCommand):
     output = proc.communicate(self.view.substr(region))[0]
     return output
 
-  def view(self):
-    return self.edit.active_view()
-
   def region_with_all_text(self):
     """Returns a region covering all text in the currently active view."""
     return sublime.Region(0, self.view.size())
@@ -64,4 +74,3 @@ class PrettifyCodeCommand(sublime_plugin.TextCommand):
       return [self.region_with_all_text()]
     else:
       return non_empty_regions
-
