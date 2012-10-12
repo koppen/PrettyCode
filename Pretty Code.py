@@ -27,7 +27,7 @@ class RubyPrettifier:
       stderr=subprocess.PIPE,
       stdout=subprocess.PIPE
     )
-    output = proc.communicate(source)[0]
+    output = proc.communicate(source.encode('utf8'))[0]
     return output
 
 class PrettifyCodeCommand(sublime_plugin.TextCommand):
@@ -60,7 +60,7 @@ class PrettifyCodeCommand(sublime_plugin.TextCommand):
   def prettify_region(self, region):
     """Replaces region with the prettified version."""
     result = self.prettified_region(region)
-    self.view.replace(self.edit, region, result)
+    self.view.replace(self.edit, region, result.decode('utf8'))
 
   def prettified_region(self, region):
     """Returns the prettified version of region."""
