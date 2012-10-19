@@ -1,0 +1,6 @@
+[
+    {
+        "caption": "Pretty Code: Prettify current code"
+        ,"command": "prettify_code"
+    }
+]

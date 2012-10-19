@@ -10,6 +10,17 @@ Pretty Code currently supports the following syntaxes:
 
 * _Ruby_: Via [ruby-beautify](https://github.com/erniebrodeur/ruby-beautify)
 
+## Using
+
+Open the command palette (cmd-shift-p) and choose "Pretty Code: Prettify current
+code".
+
+For easier access make a keybinding:
+
+    { "keys": ["super+ctrl+option+p"], "command": "prettify_code" }
+
+... or whatever key combination you prefer.
+
 ## Installing
 
 ### With Git
