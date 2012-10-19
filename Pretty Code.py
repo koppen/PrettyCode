@@ -3,7 +3,7 @@
 import sublime, sublime_plugin
 
 # Load all the prettifier wrappers
-from prettifiers import *
+from prettifiers import ruby
 
 class PrettifyCodeCommand(sublime_plugin.TextCommand):
 
