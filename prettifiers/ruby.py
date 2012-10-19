@@ -1,3 +1,7 @@
+import sublime
+import os
+import subprocess
+
 class RubyPrettifier:
   def run(self, source):
     pwd = os.path.join(sublime.packages_path(), 'PrettyCode')

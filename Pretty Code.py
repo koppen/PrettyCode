@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import sublime, sublime_plugin
-import os
-import subprocess
 
 # Load all the prettifier wrappers
 from prettifiers import *
