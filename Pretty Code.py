@@ -11,7 +11,7 @@ class PrettifyCodeCommand(sublime_plugin.TextCommand):
 
   # Sets up supported prettifiers, mapped by their syntax names in lowercase
   PRETTIFIERS = {
-    'ruby': prettifiers.ruby.RubyPrettifier
+    'ruby': ruby.RubyPrettifier
   }
 
   def run(self, edit):
