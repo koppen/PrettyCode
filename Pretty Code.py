@@ -3,12 +3,14 @@
 import sublime, sublime_plugin
 
 # Load all the prettifier wrappers
+from prettifiers import javascript
 from prettifiers import ruby
 
 class PrettifyCodeCommand(sublime_plugin.TextCommand):
 
   # Sets up supported prettifiers, mapped by their syntax names in lowercase
   PRETTIFIERS = {
+    'javascript': javascript.JavaScriptPrettifier,
     'ruby': ruby.RubyPrettifier
   }
 
