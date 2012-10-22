@@ -1,30 +1,24 @@
-import sublime
-import os
-import subprocess
+from built_in import BuiltInPrettifier
 
-class RubyPrettifier:
-  def run(self, source):
-    pwd = os.path.join(sublime.packages_path(), 'PrettyCode')
-    ruby_interpreter = '/usr/bin/env ruby'
-
-    prettifier_path = os.path.join(pwd, 'lib', 'ruby-beautify')
-    prettifier_script = '%(path)s/bin/rbeautify' % {'path': prettifier_path}
-
+class RubyPrettifier(BuiltInPrettifier):
+  def command_line(self):
     # Build the command to run with Popen. TODO: There must be a better way to build
     # the command other than string manipulation. It seems to be a recipe for cross-OS
     # issues.
     prettifier_command = ''
-    prettifier_command += ruby_interpreter
-    prettifier_command += ' -I "' + prettifier_path + '/lib' + '"'
-    prettifier_command += ' "' + prettifier_script + '"'
+    prettifier_command += self.interpreter()
+    prettifier_command += ' -I "' + self.prettifier_path() + '/lib' + '"'
+    prettifier_command += ' "' + self.prettifier_script() + '"'
+    return prettifier_command
 
-    proc = subprocess.Popen(
-      prettifier_command,
-      shell=True,
-      stdin=subprocess.PIPE,
-      stderr=subprocess.PIPE,
-      stdout=subprocess.PIPE
-    )
-    output = proc.communicate(source.encode('utf8'))[0]
-    return output
+  def interpreter(self):
+    """Returns the path to the interpreter to use for this prettifier"""
+    return '/usr/bin/env ruby'
 
+  def prettifier_path(self):
+    """Returns full path to the directory with the prettifier script"""
+    return BuiltInPrettifier.prettifier_path(self, 'ruby-beautify')
+
+  def prettifier_script(self):
+    """Returns full path to the prettifier script"""
+    return '%(path)s/bin/rbeautify' % {'path': self.prettifier_path()}
