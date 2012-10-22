@@ -34,13 +34,3 @@ The packages directory is located at:
 * OS X: `~/Library/Application Support/Sublime Text 2/Packages/`
 * Linux: `~/.config/sublime-text-2/Packages/`
 * Windows: `%APPDATA%/Sublime Text 2/Packages/`
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Added some feature')
-4. Push to the branch (git push origin my-new-feature)
-5. Create new Pull Request
-
-New code beautifiers/formatters/prettifiers are especially welcome.
