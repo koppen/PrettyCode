@@ -8,7 +8,8 @@ your code formatting shine.
 
 Pretty Code currently supports the following syntaxes:
 
-* _Ruby_: Via [ruby-beautify](https://github.com/erniebrodeur/ruby-beautify)
+* __JavaScript__: Via [js-beautify](https://github.com/einars/js-beautify)
+* __Ruby__: Via [ruby-beautify](https://github.com/erniebrodeur/ruby-beautify)
 
 ## Using
 
