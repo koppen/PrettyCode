@@ -35,3 +35,9 @@ The packages directory is located at:
 * OS X: `~/Library/Application Support/Sublime Text 2/Packages/`
 * Linux: `~/.config/sublime-text-2/Packages/`
 * Windows: `%APPDATA%/Sublime Text 2/Packages/`
+
+### Compatibility note
+
+Pretty Code has been developed and tested on OS X. I do not know if it works
+in other environments. Pull Requests with compatibility fixes and improvements
+are very welcome.
