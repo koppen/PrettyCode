@@ -7,8 +7,16 @@ class JavaScriptPrettifier(BuiltInPrettifier):
     # issues.
     prettifier_command = ''
     prettifier_command += self.interpreter()
+    prettifier_command += ' "' + self.prettifier_script() + '"'
 
-    prettifier_command += ' "' + self.prettifier_script() + '" -'
+    if self.translate_tabs_to_spaces:
+        prettifier_command += ' --indent-size=' + str(self.tab_size)
+    else:
+        prettifier_command += ' --indent-with-tabs'
+
+    prettifier_command += ' -' # STDIN
+    print prettifier_command
+
     return prettifier_command
 
   def interpreter(self):

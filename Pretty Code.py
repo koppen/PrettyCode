@@ -41,8 +41,10 @@ class PrettifyCodeCommand(sublime_plugin.TextCommand):
 
   def prettified_region(self, region):
     """Returns the prettified version of region."""
-    prettifier = PrettifyCodeCommand.PRETTIFIERS[self.syntax().lower()]
-    return prettifier().run(self.view.substr(region))
+    prettifier = PrettifyCodeCommand.PRETTIFIERS[self.syntax().lower()]()
+    prettifier.tab_size = self.view.settings().get('tab_size')
+    prettifier.translate_tabs_to_spaces = self.view.settings().get('translate_tabs_to_spaces')
+    return prettifier.run(self.view.substr(region))
 
   def region_with_all_text(self):
     """Returns a region covering all text in the currently active view."""
