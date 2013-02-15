@@ -11,6 +11,7 @@ class PrettifyCodeCommand(sublime_plugin.TextCommand):
   # Sets up supported prettifiers, mapped by their syntax names in lowercase
   PRETTIFIERS = {
     'javascript': javascript.JavaScriptPrettifier,
+    'rspec': ruby.RubyPrettifier,
     'ruby': ruby.RubyPrettifier
   }
 
